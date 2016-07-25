@@ -13,6 +13,8 @@
         /// <returns>DeckOMaticDefinition object</returns>
         public DeckOMaticDefinition Run(List<Game> games)
         {
+            var decks = new DeckCollection(games);
+
             return null;
         }
     }
