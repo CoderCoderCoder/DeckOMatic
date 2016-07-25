@@ -1,5 +1,6 @@
 ﻿namespace DeckOMaticShell
 {
+    using System.IO;
     using DeckOMatic;
 
     public class Program
@@ -10,6 +11,13 @@
         /// <param name="args">Command line arguments</param>
         public static void Main(string[] args)
         {
+            // Load games from file(s)
+            string path = args[0];
+            var games = Directory.Exists(path) ? CollectOBotLoader.LoadFromDirectory(path) : CollectOBotLoader.LoadFromFile(path);
+
+            // Analyze games
+            var analyzer = new GameAnalyzer();
+            var definition = analyzer.Run(games);
         }
     }
 }

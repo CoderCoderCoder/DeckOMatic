@@ -45,6 +45,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CollectOBot\BattleNetRegion.cs" />
+    <Compile Include="CollectOBot\ExtendedGame.cs" />
+    <Compile Include="CollectOBot\CollectOBotLoaderDataSet.cs" />
+    <Compile Include="DeckOMaticDefinition.cs" />
+    <Compile Include="CollectOBot\CollectOBotLoader.cs" />
     <Compile Include="GameAnalyzer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
