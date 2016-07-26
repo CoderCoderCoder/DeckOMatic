@@ -90,9 +90,9 @@
             foreach (var cardPlayed in game.CardHistory)
             {
                 var set = Cards.All[cardPlayed.Card.Id].Set;
-                if (set == CardSet.PROMO || // Promos
-                    set == CardSet.FP1 ||  // Nax
-                    set == CardSet.PE1)  // GvG
+                if (set == HearthDb.Enums.CardSet.PROMO || // Promos
+                    set == HearthDb.Enums.CardSet.FP1 ||  // Nax
+                    set == HearthDb.Enums.CardSet.PE1)  // GvG
                 {
                     return true;
                 }

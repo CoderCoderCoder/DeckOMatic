@@ -2,18 +2,18 @@
 {
     using System;
 
-    public class PartialDeck
+    public class Cluster
     {
         /// <summary>
         /// Constructor
         /// </summary>
-        public PartialDeck()
+        public Cluster()
         {
             this.Cards = new CardSet();
         }
 
         /// <summary>
-        /// Known cards in the deck
+        /// Cards included in the cluster
         /// </summary>
         public CardSet Cards { get; private set; }
     }

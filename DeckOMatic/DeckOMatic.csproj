@@ -48,12 +48,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CardSet.cs" />
     <Compile Include="CollectOBot\BattleNetRegion.cs" />
     <Compile Include="CollectOBot\ExtendedGame.cs" />
     <Compile Include="CollectOBot\CollectOBotLoaderDataSet.cs" />
     <Compile Include="DeckOMaticDefinition.cs" />
     <Compile Include="CollectOBot\CollectOBotLoader.cs" />
     <Compile Include="DeckAccumulator.cs" />
+    <Compile Include="Cluster.cs" />
     <Compile Include="PartialDeck.cs" />
     <Compile Include="GameAnalyzer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
