@@ -19,9 +19,17 @@
         }
 
         /// <summary>
+        /// Returns the set of decks for the given hero class
+        /// </summary>
+        public List<PartialDeck> GetDecksForHero(Hero heroClass)
+        {
+            return this.decks[heroClass];
+        }
+
+        /// <summary>
         /// Accumulate opponent decks from a set of Track-o-Bot games
         /// </summary>
-        public void AccumulateDecks(List<Game> games)
+        private void AccumulateDecks(List<Game> games)
         {
             foreach (var game in games)
             {

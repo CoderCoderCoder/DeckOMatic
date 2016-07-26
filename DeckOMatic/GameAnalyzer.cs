@@ -14,6 +14,9 @@
         public DeckOMaticDefinition Run(List<Game> games)
         {
             var decks = new DeckCollection(games);
+            var cluster = new Cluster();
+            var clusteringStrategy = new ClusteringStrategy();
+            clusteringStrategy.GenerateCluster(cluster, decks.GetDecksForHero(Hero.Warrior));
 
             return null;
         }
