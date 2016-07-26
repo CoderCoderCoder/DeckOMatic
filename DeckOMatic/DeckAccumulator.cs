@@ -57,7 +57,7 @@
                 if (cardPlayed.Player == Player.Opponent &&
                     cardPlayed.Card.Id != CardIds.NonCollectible.Neutral.TheCoin)
                 {
-                    deck.Cards.Add(cardPlayed.Card.Id);
+                    deck.Add(cardPlayed.Card.Id);
                 }
             }
 

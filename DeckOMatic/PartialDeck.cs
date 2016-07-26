@@ -2,19 +2,7 @@
 {
     using System;
 
-    public class PartialDeck
+    public class PartialDeck : CardSet
     {
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        public PartialDeck()
-        {
-            this.Cards = new CardSet();
-        }
-
-        /// <summary>
-        /// Known cards in the deck
-        /// </summary>
-        public CardSet Cards { get; private set; }
     }
 }

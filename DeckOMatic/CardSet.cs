@@ -3,6 +3,8 @@
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Text;
+    using HearthDb;
 
     /// <summary>
     /// A CardSet is a collections of card IDs.  It may have duplicates.
@@ -119,6 +121,22 @@
             }
 
             return difference;
+        }
+
+        /// <summary>
+        /// Override the ToString method
+        /// </summary>
+        public override string ToString()
+        {
+            var s = new StringBuilder();
+            foreach (string cardId in this.cards.Keys)
+            {
+                s.AppendFormat("{0} ({1});", Cards.All[cardId].Name, this.cards[cardId]);
+            }
+
+            // Remove the extra semicolon at the end
+            s.Remove(s.Length - 1, 1);
+            return s.ToString();
         }
     }
 }
