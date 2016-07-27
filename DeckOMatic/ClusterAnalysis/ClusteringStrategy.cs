@@ -46,8 +46,10 @@
             var cardWeights = new Dictionary<string, double>();
             foreach (var deckInfo in deckInfos)
             {
+                // Deck weight is (match rate)^2, which gives higher priority to closer matches
+                double deckWeight = deckInfo.MatchRate.Value * deckInfo.MatchRate.Value;
+
                 var unmatchedCards = deckInfo.Deck.Except(cluster);
-                double deckWeight = deckInfo.MatchRate.Value;
                 foreach (string cardId in unmatchedCards)
                 {
                     if (!cardWeights.ContainsKey(cardId))
