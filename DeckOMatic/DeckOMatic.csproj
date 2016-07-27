@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CardSet.cs" />
+    <Compile Include="Trace.cs" />
     <Compile Include="ClusteringStrategy.cs" />
     <Compile Include="CollectOBot\BattleNetRegion.cs" />
     <Compile Include="CollectOBot\ExtendedGame.cs" />
