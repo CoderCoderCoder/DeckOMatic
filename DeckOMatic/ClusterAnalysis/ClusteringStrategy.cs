@@ -5,7 +5,18 @@
 
     public class ClusteringStrategy
     {
-        private DeckFilter deckFilter = new DeckFilter();
+        private ClusterOptions options;
+        private DeckFilter deckFilter;
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="options">Cluster options</param>
+        public ClusteringStrategy(ClusterOptions options)
+        {
+            this.options = options;
+            this.deckFilter = new DeckFilter(options);
+        }
 
         /// <summary>
         /// Generates the cluster 

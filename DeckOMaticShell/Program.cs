@@ -21,7 +21,12 @@
 
             // Analyze games
             var analyzer = new GameAnalyzer();
-            var definition = analyzer.Run(games);
+            var definition = analyzer.Run(
+                games,
+                new ClusterOptions
+                {
+                    MinimumMatchRate = 0.75,
+                });
         }
     }
 }

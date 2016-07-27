@@ -4,6 +4,17 @@
 
     public class DeckFilter
     {
+        private ClusterOptions options;
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="options"></param>
+        public DeckFilter(ClusterOptions options)
+        {
+            this.options = options;
+        }
+
         /// <summary>
         /// Filter decks to those that match at some minimum rate
         /// </summary>

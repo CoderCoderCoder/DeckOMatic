@@ -62,6 +62,7 @@
     <Compile Include="Core\DeckAccumulator.cs" />
     <Compile Include="Models\Cluster.cs" />
     <Compile Include="Models\PartialDeck.cs" />
+    <Compile Include="Public\ClusterOptions.cs" />
     <Compile Include="Public\GameAnalyzer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
