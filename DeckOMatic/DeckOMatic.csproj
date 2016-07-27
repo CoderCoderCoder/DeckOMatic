@@ -48,18 +48,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CardSet.cs" />
-    <Compile Include="Trace.cs" />
-    <Compile Include="ClusteringStrategy.cs" />
+    <Compile Include="Models\CardSet.cs" />
+    <Compile Include="Core\Trace.cs" />
+    <Compile Include="ClusterAnalysis\ClusteringStrategy.cs" />
     <Compile Include="CollectOBot\BattleNetRegion.cs" />
     <Compile Include="CollectOBot\ExtendedGame.cs" />
     <Compile Include="CollectOBot\CollectOBotLoaderDataSet.cs" />
-    <Compile Include="DeckOMaticDefinition.cs" />
+    <Compile Include="Public\DeckOMaticDefinition.cs" />
     <Compile Include="CollectOBot\CollectOBotLoader.cs" />
-    <Compile Include="DeckAccumulator.cs" />
-    <Compile Include="Cluster.cs" />
-    <Compile Include="PartialDeck.cs" />
-    <Compile Include="GameAnalyzer.cs" />
+    <Compile Include="Core\DeckAccumulator.cs" />
+    <Compile Include="Models\Cluster.cs" />
+    <Compile Include="Models\PartialDeck.cs" />
+    <Compile Include="Public\GameAnalyzer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
