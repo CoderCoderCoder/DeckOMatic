@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using HearthDb;
 
     public class ClusteringStrategy
     {
@@ -29,9 +30,15 @@
         {
             while (cluster.Count < 30)
             {
+                Trace.Log("Processing card #{0} for cluster...", cluster.Count + 1);
+
                 var filteredDecks = this.deckFilter.FilterByMatchRate(cluster, decks);
+                Trace.Log("Filtered to {0} / {1} decks ({2:P2} of total sample).", filteredDecks.Count, decks.Count, (double)filteredDecks.Count / totalDecks);
+
                 string nextCardId = this.GetNextCardForCluster(cluster, filteredDecks);
                 cluster.Add(nextCardId);
+                Trace.Log("Added card: {0}", Cards.All[nextCardId].Name);
+                Trace.Log(String.Empty);
             }
 
             return true;
