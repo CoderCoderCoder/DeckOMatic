@@ -16,7 +16,8 @@
             var decks = new DeckCollection(games);
             var cluster = new Cluster();
             var clusteringStrategy = new ClusteringStrategy();
-            clusteringStrategy.GenerateCluster(cluster, decks.GetDecksForHero(Hero.Warrior));
+            var warriorDecks = decks.GetDecksForHero(Hero.Warrior);
+            clusteringStrategy.GenerateCluster(cluster, warriorDecks, decks.Count);
 
             return null;
         }

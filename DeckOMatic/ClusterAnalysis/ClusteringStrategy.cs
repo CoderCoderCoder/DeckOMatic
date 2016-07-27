@@ -5,17 +5,21 @@
 
     public class ClusteringStrategy
     {
+        private DeckFilter deckFilter = new DeckFilter();
+
         /// <summary>
         /// Generates the cluster 
         /// </summary>
         /// <param name="cluster">Cluster to generate, possibly seeded with some initial cards</param>
-        /// <param name="decks">Collection of partial decks</param>
+        /// <param name="decks">Collection of partial decks from which to generate cluster</param>
+        /// <param name="totalDecks">Total number of decks in sample (including those that may be associated with other clusters</param>
         /// <returns>True if a cluster was successfully generated</returns>
-        public bool GenerateCluster(Cluster cluster, List<PartialDeck> decks)
+        public bool GenerateCluster(Cluster cluster, List<PartialDeck> decks, int totalDecks)
         {
             while (cluster.Count < 30)
             {
-                string nextCardId = this.GetNextCardForCluster(cluster, decks);
+                var filteredDecks = this.deckFilter.FilterByMatchRate(cluster, decks);
+                string nextCardId = this.GetNextCardForCluster(cluster, filteredDecks);
                 cluster.Add(nextCardId);
             }
 
@@ -25,14 +29,14 @@
         /// <summary>
         /// Get next card for cluster
         /// </summary>
-        private string GetNextCardForCluster(Cluster cluster, List<PartialDeck> decks)
+        private string GetNextCardForCluster(Cluster cluster, List<DeckInfo> deckInfos)
         {
             // Account for every unmatched card, weighted by its deck's weight
             var cardWeights = new Dictionary<string, double>();
-            foreach (var deck in decks)
+            foreach (var deckInfo in deckInfos)
             {
-                double deckWeight = this.GetDeckWeight(cluster, deck);
-                var unmatchedCards = deck.Except(cluster);
+                var unmatchedCards = deckInfo.Deck.Except(cluster);
+                double deckWeight = deckInfo.MatchRate.Value;
                 foreach (string cardId in unmatchedCards)
                 {
                     if (!cardWeights.ContainsKey(cardId))
@@ -57,28 +61,6 @@
             }
 
             return max.Key;
-        }
-
-        /// <summary>
-        /// Calculate what the deck should be weighted based on how well it matches the cluster
-        /// </summary>
-        private double GetDeckWeight(Cluster cluster, PartialDeck deck)
-        {
-            if (cluster.Count == 0 || deck.Count == 0)
-            {
-                return 1.0;
-            }
-
-            double intersectionCount = (double)cluster.Intersect(deck).Count;
-            double matchRate = intersectionCount / Math.Min(cluster.Count, deck.Count);
-
-            // Filter out decks that match below the threshold
-            if (matchRate < 0.75)
-            {
-                return 0.0;
-            }
-
-            return matchRate;
         }
     }
 }

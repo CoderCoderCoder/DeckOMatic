@@ -19,6 +19,15 @@
         }
 
         /// <summary>
+        /// Total count of games across all heros
+        /// </summary>
+        public int Count
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
         /// Returns the set of decks for the given hero class
         /// </summary>
         public List<PartialDeck> GetDecksForHero(Hero heroClass)
@@ -31,6 +40,7 @@
         /// </summary>
         private void AccumulateDecks(List<Game> games)
         {
+            this.Count = 0;
             foreach (var game in games)
             {
                 if (this.ShouldIncludeGame(game))
@@ -42,6 +52,7 @@
                     }
 
                     decks[game.Opponent].Add(this.GetOpponentDeck(game));
+                    this.Count++;
                 }
             }
         }
