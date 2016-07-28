@@ -15,12 +15,14 @@
         public DeckOMaticDefinition Run(List<Game> games, ClusterOptions options)
         {
             var decks = new DeckCollection(games);
-            var cluster = new Cluster();
             var clusteringStrategy = new ClusteringStrategy(options);
             var warriorDecks = decks.GetDecksForHero(Hero.Warrior);
-            clusteringStrategy.GenerateCluster(cluster, warriorDecks, decks.Count);
+            var cluster = clusteringStrategy.GenerateCluster(warriorDecks);
 
-            return null;
+            return new DeckOMaticDefinition
+            {
+                Clusters = new Cluster[] { cluster }
+            };
         }
     }
 }

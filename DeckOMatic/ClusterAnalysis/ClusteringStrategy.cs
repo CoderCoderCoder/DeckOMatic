@@ -22,18 +22,17 @@
         /// <summary>
         /// Generates the cluster 
         /// </summary>
-        /// <param name="cluster">Cluster to generate, possibly seeded with some initial cards</param>
         /// <param name="decks">Collection of partial decks from which to generate cluster</param>
-        /// <param name="totalDecks">Total number of decks in sample (including those that may be associated with other clusters</param>
         /// <returns>True if a cluster was successfully generated</returns>
-        public bool GenerateCluster(Cluster cluster, List<PartialDeck> decks, int totalDecks)
+        public Cluster GenerateCluster(List<PartialDeck> decks)
         {
+            var cluster = new Cluster();
             while (cluster.Count < 30)
             {
                 Trace.Log("Processing card #{0} for cluster...", cluster.Count + 1);
 
                 var filteredDecks = this.deckFilter.FilterByMatchRate(cluster, decks);
-                Trace.Log("Filtered to {0} / {1} decks ({2:P2} of total sample).", filteredDecks.Count, decks.Count, (double)filteredDecks.Count / totalDecks);
+                Trace.Log("Filtered to {0} / {1} decks ({2:P2} of sample).", filteredDecks.Count, decks.Count, (double)filteredDecks.Count / decks.Count);
 
                 string nextCardId = this.GetNextCardForCluster(cluster, filteredDecks);
                 cluster.Add(nextCardId);
@@ -41,7 +40,7 @@
                 Trace.Log(String.Empty);
             }
 
-            return true;
+            return cluster;
         }
 
         /// <summary>

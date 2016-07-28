@@ -4,5 +4,6 @@
 
     public class DeckOMaticDefinition
     {
+        public Cluster[] Clusters { get; set; }
     }
 }
