@@ -51,6 +51,7 @@
     <Compile Include="ClusterAnalysis\DeckInfo.cs" />
     <Compile Include="ClusterAnalysis\DeckFilter.cs" />
     <Compile Include="ClusterAnalysis\MatchRate.cs" />
+    <Compile Include="Core\Serialization.cs" />
     <Compile Include="Models\CardSet.cs" />
     <Compile Include="Core\Trace.cs" />
     <Compile Include="ClusterAnalysis\ClusteringStrategy.cs" />

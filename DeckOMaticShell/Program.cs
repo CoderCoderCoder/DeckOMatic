@@ -3,6 +3,7 @@
     using System;
     using System.IO;
     using DeckOMatic;
+    using Newtonsoft.Json;
 
     public class Program
     {
@@ -27,6 +28,16 @@
                 {
                     MinimumMatchRate = 0.75,
                 });
+
+            string filename = "c:\\cob\\clusters.txt";
+            using (StreamWriter file = File.CreateText(filename))
+            {
+                var serializer = Serialization.GetSerializer(true);
+                serializer.Formatting = Formatting.Indented;
+                serializer.Serialize(file, definition);
+            }
+
+            System.Diagnostics.Process.Start(filename);
         }
     }
 }
