@@ -17,11 +17,11 @@
             var decks = new DeckCollection(games);
             var clusteringStrategy = new ClusteringStrategy(options);
             var warriorDecks = decks.GetDecksForHero(Hero.Warrior);
-            var cluster = clusteringStrategy.GenerateCluster(warriorDecks);
+            var clusters = clusteringStrategy.GenerateClusters(warriorDecks);
 
             return new DeckOMaticDefinition
             {
-                Clusters = new Cluster[] { cluster }
+                Clusters = clusters.ToArray()
             };
         }
     }

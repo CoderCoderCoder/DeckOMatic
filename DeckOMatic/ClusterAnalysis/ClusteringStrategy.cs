@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using HearthDb;
 
     public class ClusteringStrategy
@@ -20,11 +21,42 @@
         }
 
         /// <summary>
-        /// Generates the cluster 
+        /// Generates all clusters
         /// </summary>
         /// <param name="decks">Collection of partial decks from which to generate cluster</param>
-        /// <returns>True if a cluster was successfully generated</returns>
-        public Cluster GenerateCluster(List<PartialDeck> decks)
+        /// <returns>List of clusters</returns>
+        public List<Cluster> GenerateClusters(List<PartialDeck> decks)
+        {
+            var clusters = new List<Cluster>();
+            var remainingDecks = decks;
+            while (true)
+            {
+                // Generate the next cluster
+                var cluster = this.GenerateCluster(remainingDecks, decks.Count);
+
+                // If we didn't find a cluster, we're done
+                if (cluster == null)
+                {
+                    break;
+                }
+
+                // Add the cluster to the list
+                clusters.Add(cluster);
+
+                // Filter out decks that match that cluster
+                remainingDecks = remainingDecks.Where((deck) => MatchRate.Calculate(cluster, deck) < this.options.MinimumMatchRate).ToList();
+            }
+
+            return clusters;
+        }
+
+        /// <summary>
+        /// Generates the cluster
+        /// </summary>
+        /// <param name="decks">Collection of partial decks from which to generate cluster</param>
+        /// <param name="totalSampleSize">Total size of the sample</param>
+        /// <returns>The cluster, or null if no cluster was detected</returns>
+        private Cluster GenerateCluster(List<PartialDeck> decks, int totalSampleSize)
         {
             var cluster = new Cluster();
             while (cluster.Count < 30)
@@ -32,7 +64,15 @@
                 Trace.Log("Processing card #{0} for cluster...", cluster.Count + 1);
 
                 var filteredDecks = this.deckFilter.FilterByMatchRate(cluster, decks);
-                Trace.Log("Filtered to {0} / {1} decks ({2:P2} of sample).", filteredDecks.Count, decks.Count, (double)filteredDecks.Count / decks.Count);
+                double filteredDeckPercentage = (double)filteredDecks.Count / totalSampleSize;
+                Trace.Log("Filtered to {0} / {1} decks ({2:P2} of sample).", filteredDecks.Count, totalSampleSize, filteredDeckPercentage);
+
+                // If we didn't find enough decks to be considered a cluster, bail out
+                if (filteredDeckPercentage < this.options.MinimumClusterSize)
+                {
+                    Trace.Log("Could not find a cluster.");
+                    return null;
+                }
 
                 string nextCardId = this.GetNextCardForCluster(cluster, filteredDecks);
                 cluster.Add(nextCardId);

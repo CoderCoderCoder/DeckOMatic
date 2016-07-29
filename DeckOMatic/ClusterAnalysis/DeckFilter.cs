@@ -24,7 +24,7 @@
             foreach (var deck in decks)
             {
                 double matchRate = MatchRate.Calculate(cluster, deck);
-                if (matchRate >= 0.75)
+                if (matchRate >= this.options.MinimumMatchRate)
                 {
                     filteredDecks.Add(
                         new DeckInfo
