@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClusterAnalysis\ClusteringStrategy.cs" />
     <Compile Include="ClusterAnalysis\DeckInfo.cs" />
     <Compile Include="ClusterAnalysis\DeckFilter.cs" />
     <Compile Include="ClusterAnalysis\MatchRate.cs" />
