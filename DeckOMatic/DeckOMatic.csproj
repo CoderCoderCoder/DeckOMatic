@@ -54,7 +54,7 @@
     <Compile Include="Core\Serialization.cs" />
     <Compile Include="Models\CardSet.cs" />
     <Compile Include="Core\Trace.cs" />
-    <Compile Include="ClusterAnalysis\ClusteringStrategy.cs" />
+    <Compile Include="ClusterAnalysis\ClusterDetector.cs" />
     <Compile Include="CollectOBot\BattleNetRegion.cs" />
     <Compile Include="CollectOBot\ExtendedGame.cs" />
     <Compile Include="CollectOBot\CollectOBotLoaderDataSet.cs" />

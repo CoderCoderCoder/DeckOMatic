@@ -5,7 +5,7 @@
     using System.Linq;
     using HearthDb;
 
-    public class ClusteringStrategy
+    public class ClusterDetector
     {
         private ClusterOptions options;
         private DeckFilter deckFilter;
@@ -14,18 +14,18 @@
         /// Constructor
         /// </summary>
         /// <param name="options">Cluster options</param>
-        public ClusteringStrategy(ClusterOptions options)
+        public ClusterDetector(ClusterOptions options)
         {
             this.options = options;
             this.deckFilter = new DeckFilter(options);
         }
 
         /// <summary>
-        /// Generates all clusters
+        /// Generates an initial set of clusters
         /// </summary>
         /// <param name="decks">Collection of partial decks from which to generate cluster</param>
         /// <returns>List of clusters</returns>
-        public List<Cluster> GenerateClusters(List<PartialDeck> decks)
+        public List<Cluster> GenerateInitialClusters(List<PartialDeck> decks)
         {
             var clusters = new List<Cluster>();
             var remainingDecks = decks;
