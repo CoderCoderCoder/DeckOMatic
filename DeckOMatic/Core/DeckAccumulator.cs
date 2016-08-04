@@ -66,7 +66,7 @@
             foreach (var cardPlayed in game.CardHistory)
             {
                 if (cardPlayed.Player == Player.Opponent &&
-                    cardPlayed.Card.Id != CardIds.NonCollectible.Neutral.TheCoin)
+                    Cards.All[cardPlayed.Card.Id].Collectible)
                 {
                     deck.Add(cardPlayed.Card.Id);
                 }
