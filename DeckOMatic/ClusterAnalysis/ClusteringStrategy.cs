@@ -5,6 +5,7 @@
     public class ClusteringStrategy
     {
         private ClusterDetector clusterDetector;
+        private ClusterRefiner clusterRefiner;
 
         /// <summary>
         /// Constructor
@@ -13,6 +14,7 @@
         public ClusteringStrategy(ClusterOptions options)
         {
             this.clusterDetector = new ClusterDetector(options);
+            this.clusterRefiner = new ClusterRefiner(options);
         }
 
         /// <summary>
@@ -22,7 +24,9 @@
         /// <returns>List of clusters</returns>
         public List<Cluster> GenerateClusters(List<PartialDeck> decks)
         {
-            return this.clusterDetector.GenerateInitialClusters(decks);
+            var clusters = this.clusterDetector.GenerateInitialClusters(decks);
+            this.clusterRefiner.RefineClusters(clusters, decks);
+            return clusters;
         }
     }
 }
