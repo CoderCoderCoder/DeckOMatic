@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClusterAnalysis\CardCounter.cs" />
     <Compile Include="ClusterAnalysis\ClusterRefiner.cs" />
     <Compile Include="ClusterAnalysis\ClusteringStrategy.cs" />
     <Compile Include="ClusterAnalysis\DeckInfo.cs" />

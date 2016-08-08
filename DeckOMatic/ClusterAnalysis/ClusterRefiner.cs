@@ -26,6 +26,13 @@
             // Group decks into clusters
             var clusterGroups = this.MatchDecksToClusters(clusters, decks);
 
+            // Generate the next iteration for each cluster
+            foreach (Cluster cluster in clusterGroups.Keys)
+            {
+                var matchingDecks = clusterGroups[cluster];
+                var cardCounter = new CardCounter(matchingDecks);
+            }
+
             return null;
         }
 

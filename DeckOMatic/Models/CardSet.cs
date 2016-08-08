@@ -31,6 +31,14 @@
         }
 
         /// <summary>
+        /// Raw card counts, as a dictionary of card ID -> count
+        /// </summary>
+        public Dictionary<string, int> RawCounts
+        {
+            get { return this.cards; }
+        }
+
+        /// <summary>
         /// Add a card
         /// </summary>
         /// <param name="cardId">Card ID</param>
