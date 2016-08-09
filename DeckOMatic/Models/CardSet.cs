@@ -3,7 +3,6 @@
     using System;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Text;
     using HearthDb;
 
     /// <summary>
@@ -132,19 +131,28 @@
         }
 
         /// <summary>
+        /// Returns a diff between this CardSet and another CardSet
+        /// </summary>
+        public CardSetDiff Diff(CardSet otherSet)
+        {
+            var intersection = this.Intersect(otherSet);
+            var removed = this.Except(intersection);
+            var added = otherSet.Except(intersection);
+            return new CardSetDiff(removed, added);
+        }
+
+        /// <summary>
         /// Override the ToString method
         /// </summary>
         public override string ToString()
         {
-            var s = new StringBuilder();
+            var cardStrings = new List<string>();
             foreach (string cardId in this.cards.Keys)
             {
-                s.AppendFormat("{0} ({1});", Cards.All[cardId].Name, this.cards[cardId]);
+                cardStrings.Add(String.Format("{0} ({1})", Cards.All[cardId].Name, this.cards[cardId]));
             }
 
-            // Remove the extra semicolon at the end
-            s.Remove(s.Length - 1, 1);
-            return s.ToString();
+            return String.Join("; ", cardStrings);
         }
     }
 }

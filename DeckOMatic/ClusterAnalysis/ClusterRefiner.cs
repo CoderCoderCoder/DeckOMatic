@@ -31,6 +31,15 @@
             {
                 var matchingDecks = clusterGroups[cluster];
                 var cardCounter = new CardCounter(matchingDecks);
+
+                Cluster newCluster = new Cluster();
+                for (int i = 0; i < 30; i++)
+                {
+                    newCluster.Add(cardCounter.InstanceCounts[i].CardId);
+                }
+
+                var diff = cluster.Diff(newCluster);
+                Trace.Log(diff.ToString());
             }
 
             return null;
