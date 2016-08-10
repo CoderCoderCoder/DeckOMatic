@@ -40,6 +40,8 @@
         /// </summary>
         private void AccumulateDecks(List<Game> games)
         {
+            Trace.Log("Accumulating decks...");
+
             this.Count = 0;
             foreach (var game in games)
             {

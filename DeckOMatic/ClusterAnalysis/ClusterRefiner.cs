@@ -23,14 +23,21 @@
         /// <returns>Refined collection of clusters</returns>
         public List<Cluster> RefineClusters(List<Cluster> clusters, List<PartialDeck> decks)
         {
+            Trace.Log("");
+            Trace.Log("*** Refining clusters ***");
+
             // Group decks into clusters
             var clusterGroups = this.MatchDecksToClusters(clusters, decks);
 
             // Generate the next iteration for each cluster
             foreach (Cluster cluster in clusterGroups.Keys)
             {
+                Trace.Log("");
+                Trace.Log("Refining cluster: " + cluster.ToString());
+
                 var matchingDecks = clusterGroups[cluster];
                 var cardCounter = new CardCounter(matchingDecks);
+                this.TraceCardCounts(cardCounter, matchingDecks.Count);
 
                 Cluster newCluster = new Cluster();
                 for (int i = 0; i < 30; i++)
@@ -39,7 +46,7 @@
                 }
 
                 var diff = cluster.Diff(newCluster);
-                Trace.Log(diff.ToString());
+                Trace.Log("Diff: " + diff.ToString());
             }
 
             return null;
@@ -82,6 +89,24 @@
             }
 
             return clusterGroups;
+        }
+
+        /// <summary>
+        /// Trace card counts
+        /// </summary>
+        private void TraceCardCounts(CardCounter cardCounter, int totalCount)
+        {
+            int i = 1;
+            foreach (var instanceCount in cardCounter.InstanceCounts)
+            {
+                Trace.Log(
+                    "{4}: {0} #{1}: {2} ({3:P2})",
+                    HearthDb.Cards.All[instanceCount.CardId].Name,
+                    instanceCount.Instance,
+                    instanceCount.Count,
+                    (double)instanceCount.Count / (double)totalCount,
+                    i++);
+            }
         }
     }
 }

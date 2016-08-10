@@ -27,6 +27,9 @@
         /// <returns>List of clusters</returns>
         public List<Cluster> GenerateInitialClusters(List<PartialDeck> decks)
         {
+            Trace.Log("");
+            Trace.Log("*** Detecting clusters ***");
+
             var clusters = new List<Cluster>();
             var remainingDecks = decks;
             while (true)

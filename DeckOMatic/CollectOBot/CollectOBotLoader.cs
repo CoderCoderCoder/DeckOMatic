@@ -14,6 +14,7 @@
         /// <returns>List of games</returns>
         public static List<Game> LoadFromFile(string filename)
         {
+            Trace.Log("Loading games from " + filename);
             string rawJson = File.ReadAllText(filename);
             var dataSet = JsonConvert.DeserializeObject<CollectOBotDataSet>(rawJson);
             return new List<Game>(dataSet.Games);
