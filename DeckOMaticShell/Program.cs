@@ -17,6 +17,7 @@
         {
             // Initialize the logger
             Program.logFile = args[1];
+            File.Delete(Program.logFile);
             Trace.LogWritten += Program.OnLogWritten;
 
             // Load games from file(s)
