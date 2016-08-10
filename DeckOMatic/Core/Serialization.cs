@@ -1,7 +1,6 @@
 ﻿namespace DeckOMatic
 {
     using System;
-    using System.Collections.Generic;
     using HearthDb;
     using Newtonsoft.Json;
 
@@ -17,7 +16,7 @@
 
             if (useCardNames)
             {
-                serializer.Converters.Add(new CardSetJsonConverter());
+                serializer.Converters.Add(new CardIdJsonConverter());
             }
 
             return serializer;
@@ -26,25 +25,16 @@
         /// <summary>
         /// Converter that changes card IDs to card names
         /// </summary>
-        private class CardSetJsonConverter : JsonConverter
+        private class CardIdJsonConverter : JsonConverter
         {
+            private JsonSerializer defaultSerializer = new JsonSerializer();
+
             /// <summary>
             /// Determines whether this instance can convert the specified object type
             /// </summary>
             public override bool CanConvert(Type objectType)
             {
-                // See if the type is (or is a subclass of) CardSet
-                while (objectType != null)
-                {
-                    if (objectType == typeof(CardSet))
-                    {
-                        return true;
-                    }
-
-                    objectType = objectType.BaseType;
-                }
-
-                return false;
+                return (objectType == typeof(string));
             }
 
             /// <summary>
@@ -60,13 +50,13 @@
             /// </summary>
             public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
             {
-                List<string> cardNames = new List<string>();
-                foreach (string cardId in (CardSet)value)
+                string stringValue = (string)value;
+                if (Cards.All.ContainsKey(stringValue))
                 {
-                    cardNames.Add(Cards.All[cardId].Name);
+                    stringValue = Cards.All[stringValue].Name;
                 }
 
-                serializer.Serialize(writer, cardNames);
+                this.defaultSerializer.Serialize(writer, stringValue);
             }
         }
     }
