@@ -7,6 +7,8 @@
 
     public class Program
     {
+        private static string logFile;
+
         /// <summary>
         /// Main entry point
         /// </summary>
@@ -14,7 +16,8 @@
         public static void Main(string[] args)
         {
             // Initialize the logger
-            Trace.LogWritten += (message) => Console.WriteLine(message);
+            Program.logFile = args[1];
+            Trace.LogWritten += Program.OnLogWritten;
 
             // Load games from file(s)
             string path = args[0];
@@ -38,6 +41,16 @@
             }
 
             System.Diagnostics.Process.Start(filename);
+            System.Diagnostics.Process.Start(Program.logFile);
+        }
+
+        /// <summary>
+        /// Write trace logs to the console and a file
+        /// </summary>
+        private static void OnLogWritten(string message)
+        {
+            Console.WriteLine(message);
+            File.AppendAllText(Program.logFile, message + Environment.NewLine);
         }
     }
 }
